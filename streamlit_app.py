@@ -85,8 +85,8 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
         df = pd.DataFrame({"X": [0.0], "-rA": [0.001]})
 
     FA0 = st.number_input("Molar flow rate for CSTR+PFR system (mol/min)", value=1.0)
-    X_int = st.slider("Intermediate conversion (after first reactor)", 0.1, 0.7, 0.3, step=0.1)
-    X_final = st.slider("Final conversion (after second reactor)", X_int + 0.1, 0.9, 0.8, step=0.05)
+    X_int = st.slider("Intermediate conversion (after first reactor)", 0.1, 0.7, 0.3, step=0.05)
+    X_final = st.slider("Final conversion (after second reactor)", X_int + 0.1, 0.95, 0.8, step=0.05)
 
     r_interp = np.interp([X_int], df["X"], df["-rA"])[0]
     V_cstr = FA0 * X_int / r_interp
