@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.integrate import simpson
 
 st.title("Reaction Engineering Interactive Tool")
 
@@ -99,7 +100,8 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
         X_sub = X_array[mask]
         r_sub = r_array[mask]
         if len(X_sub) > 1:
-            V_pfr = FA0 * np.trapz(1 / r_sub, X_sub)
+            
+            V_pfr = FA0 * simpson(1 / r_sub, X_sub)
             st.write(f"CSTR volume (0 to {X_int:.2f}): {V_cstr:.2f} L")
             st.write(f"PFR volume ({X_int:.2f} to {X_final:.2f}): {V_pfr:.2f} L")
         else:
@@ -111,14 +113,16 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
         X_sub = X_array[mask]
         r_sub = r_array[mask]
         if len(X_sub) > 1:
-            V_pfr = FA0 * np.trapz(1 / r_sub, X_sub)
+            from scipy.integrate import simpson
+            V_pfr = FA0 * simpson(1 / r_sub, X_sub)
             r_interp = np.interp([X_int], df["X"], df["-rA"])[0]
             V_cstr = FA0 * (X_final - X_int) / r_interp
             st.write(f"PFR volume (0 to {X_int:.2f}): {V_pfr:.2f} L")
             st.write(f"CSTR volume ({X_int:.2f} to {X_final:.2f}): {V_cstr:.2f} L")
         else:
             st.warning("Check interpolation range and rate data.")
-
+    else:
+        st.warning("Check interpolation range and rate data.")
 
     fig, ax = plt.subplots()
     ax.plot(df["X"], 1 / df["-rA"], marker='o')
