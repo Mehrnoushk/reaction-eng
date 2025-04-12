@@ -89,7 +89,7 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
     X_int = st.slider("Intermediate conversion (after first reactor)", 0.1, 0.7, 0.3, step=0.1)
     X_final = st.slider("Final conversion (after second reactor)", X_int + 0.1, 0.9, 0.8, step=0.05)
 
-        if reactor_order == "CSTR → PFR":
+    if reactor_order == "CSTR → PFR":
         r_interp = np.interp([X_int], df["X"], df["-rA"])[0]
         V_cstr = FA0 * X_int / r_interp
         X_array = np.array(df["X"])
