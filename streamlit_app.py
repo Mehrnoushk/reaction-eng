@@ -118,8 +118,7 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
             st.write(f"CSTR volume ({X_int:.2f} to {X_final:.2f}): {V_cstr:.2f} L")
         else:
             st.warning("Check interpolation range and rate data.")
-    else:
-        st.warning("Check interpolation range and rate data.")
+
 
     fig, ax = plt.subplots()
     ax.plot(df["X"], 1 / df["-rA"], marker='o')
