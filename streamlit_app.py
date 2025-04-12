@@ -48,10 +48,10 @@ elif problem_type == "CSTR Volume Calculation":
     - Ideal mixing (concentration inside = exit)
     """)
     st.latex(r"V = \frac{F_{A0} X}{k C_{A0}(1 - X)}")
-    F_A0 = st.number_input("Entering molar flow rate F_A0 (mol/min)", value=5.0)
+    F_A0 = st.number_input("Inlet molar flow rate F_A0 (mol/min)", value=5.0)
     X_cstr = st.slider("Conversion (CSTR)", min_value=0.01, max_value=0.99, value=0.99)
-    v0_cstr = st.number_input("Volumetric flow rate (L/min)", value=10.0)
-    k_cstr = st.number_input("Rate constant k (1/s)", value=0.0001)
+    v0_cstr = st.number_input("Inlet Volumetric Flow Rate (L/min)", value=10.0)
+    k_cstr = st.number_input("Rate constant k (1/s)", value=0.01)
 
     if X_cstr >= 1.0:
         st.warning("Conversion must be < 1.0")
