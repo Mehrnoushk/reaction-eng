@@ -92,6 +92,7 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
     if reactor_order == "CSTR → PFR":
         r_interp = np.interp([X_int], df["X"], df["-rA"])[0]
         V_cstr = FA0 * X_int / r_interp
+
         X_array = np.array(df["X"])
         r_array = np.array(df["-rA"])
         mask = (X_array >= X_int) & (X_array <= X_final)
@@ -116,15 +117,7 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
             st.write(f"PFR volume (0 to {X_int:.2f}): {V_pfr:.2f} L")
             st.write(f"CSTR volume ({X_int:.2f} to {X_final:.2f}): {V_cstr:.2f} L")
         else:
-            st.warning("Check interpolation range and rate data.")np.array(df["X"])
-    r_array = np.array(df["-rA"])
-    mask = (X_array >= X_int) & (X_array <= X_final)
-    X_sub = X_array[mask]
-    r_sub = r_array[mask]
-    if len(X_sub) > 1:
-        V_pfr = FA0 * np.trapz(1 / r_sub, X_sub)
-        st.write(f"CSTR volume (0 to {X_int:.2f}): {V_cstr:.2f} L")
-        st.write(f"PFR volume ({X_int:.2f} to {X_final:.2f}): {V_pfr:.2f} L")
+            st.warning("Check interpolation range and rate data.")
     else:
         st.warning("Check interpolation range and rate data.")
 
