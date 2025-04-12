@@ -110,15 +110,3 @@ elif problem_type == "Levenspiel Plot Analysis: CSTR + PFR in Series":
     ax.set_title("Levenspiel Plot")
     st.pyplot(fig)
 
-st.markdown("### Optional: Account for Variable Volume in Gas-Phase Reactions")
-use_epsilon = st.checkbox("Use ε (epsilon) correction for variable volume?")
-
-if use_epsilon:
-    y_A0 = st.number_input("Mole fraction of A in feed (yA0)", min_value=0.0, max_value=1.0, value=1.0)
-    delta = st.number_input("Change in total moles per mole A reacted (δ)", value=1.0, step=0.1)
-    epsilon = y_A0 * delta
-    st.latex(r"\varepsilon = y_{A0} \cdot \delta = %.3f" % epsilon)
-
-    V_ratio = 1 + epsilon * X_target
-    t_corr = -np.log(1 - X_target) / (k * V_ratio)
-    st.write(f"Corrected time (accounting for variable volume): {t_corr:.2f} minutes")
